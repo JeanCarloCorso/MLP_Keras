@@ -57,23 +57,19 @@ X = normalization(X)
 
 X = np.array(X)
 Y = np.array(Y)
-print(X.shape)
 integrada = np.zeros((X.shape[0], X.shape[1]+1)) 
 integrada[:,:-1] = X
 integrada[:,-1:] = Y.reshape(X.shape[0], 1)
-print("\n\n",integrada.shape)
 treino_dados, treino_labels, teste_dados, teste_labels = particionar(integrada,2,3,31)
-treino_dados = treino_dados.tolist()
-treino_labels =treino_labels.tolist()
 
 # create model
 model = Sequential()
-model.add(Dense(100, input_dim=30, activation='relu'))
-model.add(Dropout(0.1))
+model.add(Dense(100, input_dim=31, activation='softmax'))
+model.add(Dropout(0.2))
 model.add(Dense(33, activation='relu'))
-model.add(Dropout(0.1))
+model.add(Dropout(0.2))
 model.add(Dense(11, activation='relu'))
-model.add(Dropout(0.1))
+model.add(Dropout(0.2))
 model.add(Dense(1, activation='sigmoid'))
 
 # Compile model
