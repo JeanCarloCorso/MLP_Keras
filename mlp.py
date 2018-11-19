@@ -54,9 +54,17 @@ np.random.seed(7)
 
 X, Y = PegaDados()
 X = normalization(X)
-integrada = np.concatenate((X,Y), axis=1) 
+
+X = np.array(X)
+Y = np.array(Y)
+print(X.shape)
+integrada = np.zeros((X.shape[0], X.shape[1]+1)) 
+integrada[:,:-1] = X
+integrada[:,-1:] = Y.reshape(X.shape[0], 1)
 print("\n\n",integrada.shape)
 treino_dados, treino_labels, teste_dados, teste_labels = particionar(integrada,2,3,31)
+treino_dados = treino_dados.tolist()
+treino_labels =treino_labels.tolist()
 
 # create model
 model = Sequential()
